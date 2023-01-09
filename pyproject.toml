@@ -5,10 +5,15 @@ description = ""
 authors = [
     {name = "ssghost", email = "ssprof0@gmail.com"},
 ]
-dependencies = []
+dependencies = [
+    "PyQt6>=6.4.0",
+]
 requires-python = ">=3.8"
 license = {text = "MIT"}
 
 [build-system]
 requires = ["pdm-pep517>=1.0.0"]
 build-backend = "pdm.pep517.api"
+
+[tool]
+[tool.pdm]
