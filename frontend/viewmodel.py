@@ -1,9 +1,11 @@
 UI_FILE = "view.ui"
 NEW_FILE = "../data/new_file.txt"
 OLD_FILE = "../data/file.txt"
-FLAG_FILE = "../data/flag.txt"
+S_FLAG = "../data/sflag.txt"
+R_FLAG = "../data/rflag.txt"
 
 import os 
+import time
 from PyQt6 import QtGui, QtWidgets, uic
 from PyQt6.QtCore import QModelIndex
 
@@ -43,8 +45,16 @@ class TodoList(QtWidgets.QMainWindow):
         self.delete_button.setEnabled(bool(indexes))
 
     def on_refresh(self) -> None:
-        self.task_list_model = create_model()
-        self.task_list.setModel(self.task_list_model)
+        with open(R_FLAG, '+') as f:
+            if f.readlines()[0].rstrip() == "STOP":
+                f.truncate(0)
+                f.write("START")
+        time.sleep(2)
+        with open(R_FLAG, 'r') as f:
+            flag = f.readlines()[0].rstrip()
+        if flag == "STOP":
+            self.task_list_model = create_model()
+            self.task_list.setModel(self.task_list_model)
 
     def on_store(self) -> None:
         with open(NEW_FILE, 'w') as f:
@@ -52,10 +62,10 @@ class TodoList(QtWidgets.QMainWindow):
                 task :str = str(self.task_list_model.item(index))
                 f.write(task)
                 f.write('\n')
-        with open(FLAG_FILE, '+') as f:
-            if f.readlines()[0].rstrip() == "BACKEND STOP":
+        with open(S_FLAG, '+') as f:
+            if f.readlines()[0].rstrip() == "STOP":
                 f.truncate(0)
-                f.write("BACKEND START")
+                f.write("START")
         if os.path.exists(OLD_FILE):
             os.remove(OLD_FILE)
         os.rename(NEW_FILE, OLD_FILE)

@@ -7,6 +7,11 @@ use surrealdb::{Datastore, Response, Session};
 
 mod notify;
 
+NEW_FILE = "../data/new_file.txt"
+OLD_FILE = "../data/file.txt"
+S_FLAG = "../data/sflag.txt"
+R_FLAG = "../data/rflag.txt"
+
 type DB = (Datastore, Session);
 
 #[tokio::main]
@@ -47,7 +52,7 @@ async fn main() -> Result<()> {
 	Ok(())
 }
 
-async fn create_task((ds, ses): &DB, title: &str, priority: i32) -> Result<String> {
+async fn db_write((ds, ses): &DB, title: &str, priority: i32) -> Result<String> {
 	let sql = "CREATE task CONTENT $data";
 
 	let data: BTreeMap<String, Value> = [
@@ -80,4 +85,14 @@ fn into_iter_objects(ress: Vec<Response>) -> Result<impl Iterator<Item = Result<
 		}
 		_ => Err(anyhow!("No records found.")),
 	}
+}
+
+async fn db_read((ds, ses): &DB) -> {
+	let sql = "SELECT * from task";
+	let ress = ds.execute(sql, ses, None, false).await?;
+	for object in into_iter_objects(ress)? {
+		println!("record {}", object?);
+	}
+
+	Ok(())
 }
