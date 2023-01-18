@@ -1,6 +1,8 @@
 UI_FILE = "view.ui"
-DATA_FILE = "../data/res.txt"
+NEW_FILE = "../data/new_file.txt"
+OLD_FILE = "../data/file.txt"
 
+import os 
 from PyQt6 import QtGui, QtWidgets, uic
 from PyQt6.QtCore import QModelIndex
 
@@ -40,7 +42,15 @@ class TodoList(QtWidgets.QMainWindow):
         self.delete_button.setEnabled(bool(indexes))
 
     def on_refresh(self) -> None:
-        pass
+        create_model()
 
-    def on_store(self) -> None:
-        pass
+    async def on_store(self) -> None:
+        with open(NEW_FILE, 'w') as f:
+            for index in range(self.task_list_model.rowCount()):
+                task :str = str(self.task_list_model.item(index))
+                f.write(task)
+                f.write('\n')
+        if os.path.exists(OLD_FILE):
+            os.remove(OLD_FILE)
+        os.rename(NEW_FILE, OLD_FILE)
+

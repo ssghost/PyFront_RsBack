@@ -1,9 +1,10 @@
 from PyQt6 import QtGui
+from typing import List
 
-DATA_FILE = "../data/res.txt"
+DATA_FILE = "../data/file.txt"
 
-with open(DATA_FILE) as f:
-    TASK_LIST = [str(line).rstrip() for line in f]
+with open(DATA_FILE, 'r') as f:
+    TASK_LIST :List[str] = [str(line).rstrip() for line in f]
 
 def create_model() -> QtGui.QStandardItemModel:
     model = QtGui.QStandardItemModel()
