@@ -1,14 +1,11 @@
 from PyQt6 import QtGui
 
-TASK_LIST = [
-    "Process email inbox",
-    "Write blog post",
-    "Prepare video scripts",
-    "Tax accounting",
-    "Prepare presentation",
-    "Go to the gym",
-]
+DATA_FILE = "../data/res.txt"
 
+TASK_LIST = []
+with open(DATA_FILE) as f:
+    t = f.readline()
+    TASK_LIST.append(t)
 
 def create_model() -> QtGui.QStandardItemModel:
     model = QtGui.QStandardItemModel()
