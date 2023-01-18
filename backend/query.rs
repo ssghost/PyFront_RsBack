@@ -5,6 +5,8 @@ use std::collections::BTreeMap;
 use surrealdb::sql::{thing, Datetime, Object, Thing, Value};
 use surrealdb::{Datastore, Response, Session};
 
+mod notify;
+
 type DB = (Datastore, Session);
 
 #[tokio::main]

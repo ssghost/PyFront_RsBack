@@ -43,7 +43,8 @@ class TodoList(QtWidgets.QMainWindow):
         self.delete_button.setEnabled(bool(indexes))
 
     def on_refresh(self) -> None:
-        create_model()
+        self.task_list_model = create_model()
+        self.task_list.setModel(self.task_list_model)
 
     def on_store(self) -> None:
         with open(NEW_FILE, 'w') as f:
