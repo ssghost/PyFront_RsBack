@@ -1,4 +1,5 @@
-#![allow(unused)] // While exploring, remove for prod.
+#![allow(unused)] 
+use std::fs;
 use anyhow::{anyhow, Result};
 use std::collections::BTreeMap;
 use surrealdb::sql::{thing, Datetime, Object, Thing, Value};
