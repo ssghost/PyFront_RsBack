@@ -1,4 +1,5 @@
 UI_FILE = "view.ui"
+DATA_FILE = "../data/res.txt"
 
 from PyQt6 import QtGui, QtWidgets, uic
 from PyQt6.QtCore import QModelIndex
