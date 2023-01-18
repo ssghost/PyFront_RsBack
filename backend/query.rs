@@ -5,7 +5,7 @@ use std::collections::BTreeMap;
 use surrealdb::sql::{thing, Datetime, Object, Thing, Value};
 use surrealdb::{Datastore, Response, Session};
 
-mod notify;
+mod flag;
 
 NEW_FILE = "../data/new_file.txt"
 OLD_FILE = "../data/file.txt"
