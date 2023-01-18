@@ -1,3 +1,4 @@
+#![allow(unused)] 
 use notify::{Watcher, RecursiveMode, watcher};
 use std::sync::mpsc::channel;
 use std::time::Duration;
