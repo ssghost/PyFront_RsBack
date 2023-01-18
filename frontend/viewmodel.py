@@ -1,6 +1,7 @@
 UI_FILE = "view.ui"
 NEW_FILE = "../data/new_file.txt"
 OLD_FILE = "../data/file.txt"
+FLAG_FILE = "../data/flag.txt"
 
 import os 
 from PyQt6 import QtGui, QtWidgets, uic
@@ -44,12 +45,16 @@ class TodoList(QtWidgets.QMainWindow):
     def on_refresh(self) -> None:
         create_model()
 
-    async def on_store(self) -> None:
+    def on_store(self) -> None:
         with open(NEW_FILE, 'w') as f:
             for index in range(self.task_list_model.rowCount()):
                 task :str = str(self.task_list_model.item(index))
                 f.write(task)
                 f.write('\n')
+        with open(FLAG_FILE, '+') as f:
+            if f.readlines()[0].rstrip() == "BACKEND STOP":
+                f.truncate(0)
+                f.write("BACKEND START")
         if os.path.exists(OLD_FILE):
             os.remove(OLD_FILE)
         os.rename(NEW_FILE, OLD_FILE)
