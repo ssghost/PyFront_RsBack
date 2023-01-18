@@ -17,7 +17,8 @@ class TodoList(QtWidgets.QMainWindow):
         )
         self.todo_edit.returnPressed.connect(self.on_add_task)
         self.delete_button.pressed.connect(self.on_delete_task)
-        # self.delete_button.setEnabled(False)
+        self.refresh_button.pressed.connect(self.on_refresh)
+        self.store_button.pressed.connect(self.on_store)
 
     def on_add_task(self) -> None:
         text: str = self.todo_edit.text()
@@ -36,3 +37,9 @@ class TodoList(QtWidgets.QMainWindow):
     def on_change_selection(self) -> None:
         indexes: list[QModelIndex] = self.task_list.selectedIndexes()
         self.delete_button.setEnabled(bool(indexes))
+
+    def on_refresh(self) -> None:
+        pass
+
+    def on_store(self) -> None:
+        pass

@@ -34,6 +34,22 @@
           <bool>false</bool>
          </property>
         </widget>
+        <widget class="QPushButton" name="refresh_button">
+         <property name="text">
+          <string>Refesh</string>
+         </property>
+         <property name="enabled">
+          <bool>true</bool>
+         </property>
+        </widget>
+        <widget class="QPushButton" name="store_button">
+         <property name="text">
+          <string>Store</string>
+         </property>
+         <property name="enabled">
+          <bool>true</bool>
+         </property>
+        </widget>
     </item>
    </layout>
   </widget>
